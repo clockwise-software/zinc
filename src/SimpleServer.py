@@ -30,22 +30,20 @@ def studentAddDetails():
         registeredLicenses = request.form.get('registeredLicenses', default="Error") 
         skill = request.form.get('skill', default="Error")  
         skillLevel = request.form.get('skillLevel', default="Error")
-	    print("inserting employee"+firstName)
+        print("inserting employee"+firstName)
         try:
 			conn = sqlite3.connect(DATABASE)
 			cur = conn.cursor()
 			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
 						VALUES (?,?,?,?,?,?,?,?,?,?,?)",(firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel ) )
-
 			conn.commit()
-			msg = "Record successfully added"
-		except:
+			msg = "Record successfully added"	
+        except:
 			conn.rollback()
 			msg = "error in insert operation"
-		finally:
+        finally:
 			conn.close()
 			return msg
-
 @app.route("/Employee/Search", methods = ['GET','POST'])
 def surnameSearch():
 	if request.method =='GET':
