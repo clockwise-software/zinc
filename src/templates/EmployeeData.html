@@ -2,13 +2,20 @@
 
 
 {%block mainBlock%}
-<h2>Add Employee Data</h2> Currently Disabled On Backend
+<h2>Add Employee Data</h2> <!--Currently Disabled On Backend: NOT TRUE!--> 
 
 <form id='myForm' onsubmit="return loadName()">
   <label>First name:<input type = "text" name = "firstName"><br></label>
   <label>Last Name:<input type = "text" name = "lastName"><br></label>
-  <label>Business Unit:<input type = "text" name = "bu"><br></label>
+  <label> FT/PT/.75:<input type = "text" name = "FT/PT/.75"><br></label> 
+  <label>Business Unit:<input type = "text" name = "bu"><br></label> 
+  <label>City:<input type = "text" name = "city"><br></label>  
   <label>State:<input type = "text" name = "state"><br></label>
+  <label>Career Matrix Title:<input type = "text" name = "careerMatrixTitle"><br></label> 
+  <label>Total Years:<input type = "number" name = "totalYears"><br></label> 
+  <label>Registered Licenses:<input type = "text" name = "registeredLicenses"><br></label>
+  <label>Skill:<input type = "text" name = "skill"><br></label> 
+  <label>Skill Level:<input type = "text" name = "skillLevel"><br></label>
 
   <button type = "submit"> submit </button>
 </form>
@@ -17,10 +24,22 @@
 <script>
   function loadName() {
     var firstName = document.forms["myForm"]["firstName"].value;
-    var lastName = document.forms["myForm"]["lastName"].value;
-    var businessunit = document.forms["myForm"]["bu"].value;
-    var state = document.forms["myForm"]["state"].value;
-    params = 'firstName='+firstName+'&lastName='+lastName+'&bu='+businessunit+'&state='+state;
+    var lastName = document.forms["myForm"]["lastName"].value; 
+    var ftpt = document.forms["myForm"]["FT?PT?.75"].value; 
+    var businessunit = document.forms["myForm"]["bu"].value; 
+    var city = document.forms["myForm"]["city"].value;
+    var state = document.forms["myForm"]["state"].value; 
+    var careerMatrixTitle = document.forms["myForm"]["careerMatrixTitle"].value; 
+    var totalYears = document.forms["myForm"]["totalYears"].value; 
+    var registeredLicenses = document.forms["myForm"]["registeredLicenses"].value; 
+    var skill = document.forms["myForm"]["skill"].value; 
+    var skillLevel = document.forms["myForm"]["skillLevel"].value;
+
+    //Form params passed to the python here
+    params = 'firstName='+firstName+'&lastName='+lastName+'&FT/PT/.75='+ftpt+'&bu='+businessunit+'&city='+city+'&state='+state+
+    '&cmt='+careerMatrixTitle+'&totalYears='+totalYears+'&registeredLicenses='+registeredLicenses+'&skill='+skill+'&skillLevel='
+    +skillLevel;
+
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", '/Employee/AddEmployee', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

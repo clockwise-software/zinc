@@ -22,13 +22,20 @@ def studentAddDetails():
 		firstName = request.form.get('firstName', default="Error") 
 		lastName = request.form.get('lastName', default="Error")
 		businessunit = request.form.get('bu', default="Error")
-		state = request.form.get('state', default="Error")
-		print("inserting employee"+firstName)
-		try:
+		state = request.form.get('state', default="Error") 
+        ftpt = request.form.get('FT/PT/.75', default="Error") 
+        city = request.form.get('city', default="Error") 
+        cmt = request.form.get('cmt', default="Error") 
+        totalYears = request.form.get('totalYears', default="Error") 
+        registeredLicenses = request.form.get('registeredLicenses', default="Error") 
+        skill = request.form.get('skill', default="Error")  
+        skillLevel = request.form.get('skillLevel', default="Error")
+	    print("inserting employee"+firstName)
+        try:
 			conn = sqlite3.connect(DATABASE)
 			cur = conn.cursor()
-			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province')\
-						VALUES (?,?,?,?)",(firstName, lastName, businessunit, state ) )
+			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
+						VALUES (?,?,?,?,?,?,?,?,?,?,?)",(firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel ) )
 
 			conn.commit()
 			msg = "Record successfully added"
