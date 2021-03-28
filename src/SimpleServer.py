@@ -16,13 +16,13 @@ def basic():
 
 @app.route("/Employee/AddEmployee", methods = ['POST','GET'])
 def studentAddDetails():
-	if request.method =='GET':
-		return render_template('EmployeeData.html')
-	if request.method =='POST':
-		firstName = request.form.get('firstName', default="Error") 
-		lastName = request.form.get('lastName', default="Error")
-		businessunit = request.form.get('bu', default="Error")
-		state = request.form.get('state', default="Error") 
+    if request.method =='GET':
+        return render_template('EmployeeData.html')
+    if request.method =='POST':
+        firstName = request.form.get('firstName', default="Error") 
+        lastName = request.form.get('lastName', default="Error")
+        businessunit = request.form.get('bu', default="Error")
+        state = request.form.get('state', default="Error") 
         ftpt = request.form.get('FT/PT/.75', default="Error") 
         city = request.form.get('city', default="Error") 
         cmt = request.form.get('cmt', default="Error") 
@@ -32,18 +32,18 @@ def studentAddDetails():
         skillLevel = request.form.get('skillLevel', default="Error")
         print("inserting employee"+firstName)
         try:
-			conn = sqlite3.connect(DATABASE)
-			cur = conn.cursor()
-			cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
-						VALUES (?,?,?,?,?,?,?,?,?,?,?)",(firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel ) )
-			conn.commit()
-			msg = "Record successfully added"	
+            conn = sqlite3.connect(DATABASE)
+            cur = conn.cursor()
+            cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?)",(firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel ) )
+            conn.commit()
+            msg = "Record successfully added"	
         except:
-			conn.rollback()
-			msg = "error in insert operation"
+            conn.rollback()
+            msg = "error in insert operation"
         finally:
-			conn.close()
-			return msg
+            conn.close()
+            return msg
 @app.route("/Employee/Search", methods = ['GET','POST'])
 def surnameSearch():
 	if request.method =='GET':
