@@ -16,12 +16,16 @@ def basic():
 
 @app.route("/Employee/AddEmployee", methods = ['POST','GET'])
 def studentAddDetails():
-    if request.method =='GET':
+    if request.method =='GET': 
+        print('returning a get')
         return render_template('EmployeeData.html')
     if request.method =='POST':
         firstName = request.form.get('firstName', default="Error") 
+        print(firstName + 'something')
         lastName = request.form.get('lastName', default="Error")
-        businessunit = request.form.get('bu', default="Error")
+        print(lastName)
+        businessunit = request.form.get('bu', default="Error") 
+        print(businessunit)
         state = request.form.get('state', default="Error") 
         ftpt = request.form.get('FT/PT/.75', default="Error") 
         city = request.form.get('city', default="Error") 
