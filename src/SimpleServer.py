@@ -83,7 +83,7 @@ def surnameInjectionSearch():
 		conn.close()
 		return render_template('Employee.html', data = data)
 
-@app.route("Employee/Modify", methods=['GET', 'POST']) 
+@app.route("/Employee/Modify", methods=['GET', 'POST']) 
 def modifyEmployee():
     if request.method == 'GET': 
         return render_template('EmployeeModify.html') 
