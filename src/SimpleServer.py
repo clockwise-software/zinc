@@ -19,13 +19,14 @@ def studentAddDetails():
     if request.method =='GET': 
         print('returning a get')
         return render_template('EmployeeData.html')
-    if request.method =='POST':
+    if request.method =='POST': 
+        #print('Made it to the post')
         firstName = request.form.get('firstName', default="Error") 
-        print(firstName + 'something')
+        #print(firstName + 'something')
         lastName = request.form.get('lastName', default="Error")
-        print(lastName)
+        #print(lastName)
         businessunit = request.form.get('bu', default="Error") 
-        print(businessunit)
+        #print(businessunit)
         state = request.form.get('state', default="Error") 
         ftpt = request.form.get('FT/PT/.75', default="Error") 
         city = request.form.get('city', default="Error") 
