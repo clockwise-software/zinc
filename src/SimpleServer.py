@@ -96,7 +96,7 @@ def mainFunctionality():
         return render_template('Main.html')
     if request.method == 'POST':
         #Queries and such here, also functionality for filters once they appear
-
+        return render_template('Main.html') #Might need to rename this
 
 if __name__ == "__main__":
     app.run(debug=True)
