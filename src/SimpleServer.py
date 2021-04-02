@@ -18,19 +18,62 @@ def basic():
 
 @app.route("/Employee/AddEmployee", methods=['POST', 'GET'])
 def studentAddDetails():
-    if request.method == 'GET':
+
+    if request.method =='GET': 
+        print('returning a get')
         return render_template('EmployeeData.html')
-    if request.method == 'POST':
-        firstName = request.form.get('firstName', default="Error")
+    if request.method =='POST': 
+        #print('Made it to the post')
+        firstName = request.form.get('firstName', default="Error") 
+        #print(firstName + 'something')
         lastName = request.form.get('lastName', default="Error")
-        businessunit = request.form.get('bu', default="Error")
-        state = request.form.get('state', default="Error")
+        #print(lastName)
+        businessunit = request.form.get('bu', default="Error") 
+        #print(businessunit)
+        state = request.form.get('state', default="Error") 
+        ftpt = request.form.get('FT/PT/.75', default="Error") 
+        city = request.form.get('city', default="Error") 
+        cmt = request.form.get('cmt', default="Error") 
+        totalYears = request.form.get('totalYears', default="Error") 
+        registeredLicenses = request.form.get('registeredLicenses', default="Error") 
+        skill = request.form.get('skill', default="Error")  
+        skillLevel = request.form.get('skillLevel', default="Error")
+
         print("inserting employee"+firstName)
         try:
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'Business Unit', 'State/Province')\
-						VALUES (?,?,?,?)", (firstName, lastName, businessunit, state))
+
+            cur.execute("INSERT INTO EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?)",(firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel ) )
+            conn.commit()
+            msg = "Record successfully added"	
+        except:
+            conn.rollback()
+            msg = "error in insert operation"
+        finally:
+            conn.close()
+            return msg
+@app.route("/Employee/Search", methods = ['GET','POST'])
+def surnameSearch():
+	if request.method =='GET':
+		return render_template('EmployeeSearch.html')
+	if request.method =='POST':
+		try:
+			lastName = request.form.get('lastName', default="Error") #rem: args for get form for post
+			conn = sqlite3.connect(DATABASE)
+			cur = conn.cursor()
+			cur.execute("SELECT * FROM 'EmployeeList' WHERE LastName=?", [lastName])
+			data = cur.fetchall()
+			print(data)
+		except:
+			print('there was an error', data)
+			conn.close()
+		finally:
+			conn.close()
+			#return str(data)
+			return render_template('Employee.html', data = data)
+
 
             conn.commit()
             msg = "Record successfully added"
