@@ -90,6 +90,16 @@ def surnameInjectionSearch():
         return render_template('Employee.html', data=data)
 
 
+
+@app.route("/Employee/Modify", methods=['GET', 'POST']) 
+def modifyEmployee():
+    if request.method == 'GET': 
+        return render_template('EmployeeModify.html') 
+    if request.method == 'POST': 
+        #DB Functionality here
+        return render_template('EmployeeModify.html')
+        
+
 @app.route("/Employee/Main", methods=['GET', 'POST'])
 def mainFunctionality():
     if request.method == 'GET':
@@ -97,6 +107,7 @@ def mainFunctionality():
     if request.method == 'POST':
         #Queries and such here, also functionality for filters once they appear
         return render_template('Main.html') #Might need to rename this
+
 
 if __name__ == "__main__":
     app.run(debug=True)
