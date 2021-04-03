@@ -54,36 +54,7 @@ def studentAddDetails():
         finally:
             conn.close()
             return msg
-@app.route("/Employee/Search", methods = ['GET','POST'])
-def surnameSearch():
-	if request.method =='GET':
-		return render_template('EmployeeSearch.html')
-	if request.method =='POST':
-		try:
-			lastName = request.form.get('lastName', default="Error") #rem: args for get form for post
-			conn = sqlite3.connect(DATABASE)
-			cur = conn.cursor()
-			cur.execute("SELECT * FROM 'EmployeeList' WHERE LastName=?", [lastName])
-			data = cur.fetchall()
-			print(data)
-		except:
-			print('there was an error', data)
-			conn.close()
-		finally:
-			conn.close()
-			#return str(data)
-			return render_template('Employee.html', data = data)
-
-
-            conn.commit()
-            msg = "Record successfully added"
-        except:
-            conn.rollback()
-            msg = "error in insert operation"
-        finally:
-            conn.close()
-            return msg
-
+            
 
 @app.route("/Employee/Search", methods=['GET', 'POST'])
 def surnameSearch():
