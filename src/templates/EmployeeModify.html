@@ -1,6 +1,47 @@
 {%extends 'generalPageStyled.html'%} 
+{%block mainBlock%} 
 
-<h1>Modify Employees Here></h1> 
+<h2> Change Details about Employee</h2>
+<form>
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname"> <br>
+  
+  <input type="radio" id="fullTime" name="ftpt" value="fullTime">
+  <label for="fullTime"> Full Time</label>
+  <input type="radio" id="partTime" name="ftpt" value="partTime">
+  <label for="partTime"> Part Time</label>
+  
+  <input type="radio" id=".75" name="ftpt" value=".75">
+  <label for=".75"> .75 Time</label><br>
 
-<!--html template for modifying employees in the database--> 
-<!--Do whatever you please with this :) -->
+  <label for="bu">Business Unit</label><br>
+  <input type="text" id="bu" name="bu"><br>
+ 
+  <label for="city">City </label><br>
+  <input type="text" id="city" name="city"><br>
+  
+  <label for="state">State</label><br>
+  <input type="text" id="state" name="state"><br>
+ 
+  <label for="cmt">Carrer Matrix Title </label><br>
+  <input type="text" id="cmt" name="cmt"><br>
+ 
+  <label for="totalYears">Total Years </label><br>
+  <input type="text" id="totalYears" name="totalYears"><br>
+  
+  <label for="Licenses">Registered Licenses</label><br>
+  <input type="text" id="Licenses" name="Licenses"><br>
+  
+  <label for="Skill">Skill</label><br>
+  <input type="text" id="Skill" name="Skill"><br>
+ 
+  <label for="skilllevel">Skill level</label><br>
+  <input type="text" id="skilllevel" name="skilllevel"><br>
+  
+
+</form>
+
+
+{%endblock%}
