@@ -58,32 +58,20 @@ def surnameSearch():
     if request.method == 'GET':
         return render_template('EmployeeSearch.html')
     if request.method == 'POST':
-        firstName = request.form.get('firstName', default="Error")
-        lastName = request.form.get('lastName', default="Error")
-        businessunit = request.form.get('bu', default="Error")
-        state = request.form.get('state', default="Error")
-        ftpt = request.form.get('FT/PT/.75', default="Error")
-        city = request.form.get('city', default="Error")
-        cmt = request.form.get('cmt', default="Error")
-        totalYears = request.form.get('totalYears', default="Error")
-        registeredLicenses = request.form.get(
-            'registeredLicenses', default="Error")
-        skill = request.form.get('skill', default="Error")
-        skillLevel = request.form.get('skillLevel', default="Error")
         try:
-            # rem: args for get form for post
+            # rem: args for get form for post 
+            lastName=request.form.get('lastName', default="Error")
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            cur.execute("UPDATE  EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
-                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?) WHERE 'LastName'", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))
-            conn.commit()
-            msg = "Record successfully updated"
+            cur.execute("SELECT * FROM 'EmployeeList' WHERE LastName=?", [lastName])
+            data = cur.fetchall()
+            print(data)
         except:
-            conn.rollback()
-            msg = "error in modification operation"
+            print('there was an error', data)
+            conn.close()
         finally:
             conn.close()
-            return msg
+            return render_template('Employee.html', data=data)
 
 
 # The name says it...
@@ -116,15 +104,31 @@ def modifyEmployee():
     if request.method == 'GET':
         return render_template('EmployeeModify.html')
     if request.method == 'POST':
+        firstName = request.form.get('firstName', default="Error")
+        lastName = request.form.get('lastName', default="Error")
+        businessunit = request.form.get('bu', default="Error")
+        state = request.form.get('state', default="Error")
+        ftpt = request.form.get('FT/PT/.75', default="Error")
+        city = request.form.get('city', default="Error")
+        cmt = request.form.get('cmt', default="Error")
+        totalYears = request.form.get('totalYears', default="Error")
+        registeredLicenses = request.form.get('registeredLicenses', default="Error")
+        skill = request.form.get('skill', default="Error")
+        skillLevel = request.form.get('skillLevel', default="Error")
         try:
-            lastName = request.form.get('lastName', default="Error")
+            # rem: args for get form for post
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            employee = cur.execute(
-                "SELECT * FROM 'EmployeeList' WHERE LastName=?", [lastName])
-            data = cur.fetchall()
-
-        return render_template('EmployeeModify.html')
+            cur.execute("UPDATE  EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?) WHERE 'LastName'", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))
+            conn.commit()
+            msg = "Record successfully updated"
+        except:
+            conn.rollback()
+            msg = "error in modification operation"
+        finally:
+            conn.close()
+            return msg
 
 
 @app.route("/Employee/Main", methods=['GET', 'POST'])
