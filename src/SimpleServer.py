@@ -63,11 +63,12 @@ def surnameSearch():
     if request.method == 'POST':
         try:
             # rem: args for get form for post
-            lastName = request.form.get('lastName', default="Error")
+            #lastName = request.form.get('lastName', default="Error")
+            firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel='Tim', '', '', '', '', '', '', '', '', '', '' 
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute(
-                "SELECT * FROM 'EmployeeList' WHERE LastName=?", [lastName])
+                "SELECT * FROM 'EmployeeList' WHERE FirstName=? or LastName=? or [FT/PT/.75?]=? or [Business Unit]=? or [City]=? or [State/Province]=? or [Career Matrix Title]=? or [Total Years]=? or [Registered Licenses]=? or [Skill]=? or [Skill Level]=?", [firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel])
             data = cur.fetchall()
             print(data)
         except:
