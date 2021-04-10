@@ -2,7 +2,7 @@
 {%block mainBlock%} 
 
 <h2> Change Details about Employee</h2>
-<form>
+<form id='myForm' onsubmit="return modifyEmployees()">
   <label for="fname">First name:</label><br>
   <input type="text" id="fname" name="fname"><br>
   <label for="lname">Last name:</label><br>
@@ -62,6 +62,8 @@ function modifyEmployees()
     params = 'firstName='+firstName+'&lastName='+lastName+'&FT/PT/.75='+ftpt+'&bu='+businessunit+'&city='+city+'&state='+state+
     '&cmt='+careerMatrixTitle+'&totalYears='+totalYears+'&registeredLicenses='+registeredLicenses+'&skill='+skill+'&skillLevel='
     +skillLevel; 
+
+    //console.log(params);
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", '/Employee/Modify', true); // true is asynchronous

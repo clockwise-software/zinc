@@ -120,7 +120,7 @@ def modifyEmployee():
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute("UPDATE  EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
-                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?) WHERE 'LastName'", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))
+                         WHERE LastName='LastName' VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))
             conn.commit()
             msg = "Record successfully updated"
         except:
