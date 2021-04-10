@@ -4,7 +4,7 @@
 {%block mainBlock%}
 <h2>Add Employee Data</h2> <!--Currently Disabled On Backend: NOT TRUE!--> 
 
-<form id='myForm' onsubmit="return loadName()">
+<form id='myForm' onsubmit="return loadData()">
   <label>First name:<input type = "text" name = "firstName"><br></label>
   <label>Last Name:<input type = "text" name = "lastName"><br></label>
   <label> FT/PT/.75:<input type = "text" name = "FT/PT/.75"><br></label> 
@@ -22,7 +22,7 @@
 <span id='txt'></span>
 
 <script>
-  function loadName() {
+  function loadData() {
     var firstName = document.forms["myForm"]["firstName"].value;
     var lastName = document.forms["myForm"]["lastName"].value; 
     var ftpt = document.forms["myForm"]["FT/PT/.75"].value; 
