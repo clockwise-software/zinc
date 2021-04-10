@@ -115,7 +115,7 @@
             $('#skillYears').multiselect();
         });
     </script>
-<button type = "submit">Submit</button>
+<button type = "submit">submit</button>
 </form>
 
 
@@ -140,7 +140,7 @@ function loadData()
     +skillLevel; 
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/Employee/AddEmployee', true); // true is asynchronous
+    xhttp.open("POST", '/Employee/Search', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onload = function() {
       if (xhttp.readyState === 4 && xhttp.status === 200) {
