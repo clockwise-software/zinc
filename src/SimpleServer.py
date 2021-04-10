@@ -62,12 +62,10 @@ def surnameSearch():
             cur = conn.cursor()
             cur.execute("SELECT FirstName FROM EmployeeList")
             FirstName = cur.fetchall()
-            print(FirstName)
 
             cur.execute("SELECT LastName from EmployeeList")
             LastName = cur.fetchall()
-            print(LastName)
-
+        
             cur.execute("SELECT DISTINCT [FT/PT/.75?] from EmployeeList")
             Time = cur.fetchall()
 
@@ -106,7 +104,23 @@ def surnameSearch():
         try:
             # rem: args for get form for post
             #lastName = request.form.get('lastName', default="Error")
-            firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel='Tim', '', '', '', '', '', '', '', '', '', '' 
+            #firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel='Tim', None, None, None, None, None, None, None, None, None, None 
+            firstName = request.form.get('fname', default=None)
+            lastName = request.form.get('lname', default=None)
+            businessunit = request.form.get('bu', default=None)
+            state = request.form.get('state', default=None)
+            ftpt = request.form.get('FT/PT/.75', default=None)
+            city = request.form.get('city', default=None)
+            cmt = request.form.get('cmt', default=None)
+            totalYears = request.form.get('totalYears', default=None)
+            registeredLicenses = request.form.get(
+                'registeredLicenses', default=None)
+            skill = request.form.get('skill', default=None)
+            skillLevel = request.form.get('skillLevel', default=None)
+
+            print(firstName)
+            print(state)
+
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
             cur.execute(
@@ -119,7 +133,7 @@ def surnameSearch():
             conn.close()
         finally:
             conn.close()
-            return render_template('Employee.html', data=data)
+            return render_template('EmployeeSearch.html', data=data)
 
 @app.route("/Employee/Modify", methods=['GET', 'POST'])
 def modifyEmployee():
