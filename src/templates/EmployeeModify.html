@@ -2,15 +2,16 @@
 {%block mainBlock%} 
 
 <h2> Change Details about Employee</h2>
-<form id='myForm' onsubmit="return modifyEmployees()">
+<!-- <form id='myForm' onsubmit="return modifyEmployees()"> -->
+<form id='myForm' action='/Employee/Modify' method='POST'>
   <label for="fname">First name:</label><br>
   <input type="text" id="fname" name="fname"><br>
   <label for="lname">Last name:</label><br>
   <input type="text" id="lname" name="lname"> <br>
   
-  <input type="radio" id="fullTime" name="ftpt" value="fullTime">
+  <input type="radio" id="fullTime" name="ftpt" value="Full-Time">
   <label for="fullTime"> Full Time</label>
-  <input type="radio" id="partTime" name="ftpt" value="partTime">
+  <input type="radio" id="partTime" name="ftpt" value="Part-Time">
   <label for="partTime"> Part Time</label>
   
   <input type="radio" id=".75" name="ftpt" value=".75">

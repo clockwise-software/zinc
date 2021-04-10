@@ -5,6 +5,7 @@
 import os
 from flask import Flask, redirect, request, render_template
 import sqlite3
+from sqlite3 import Error
 
 DATABASE = 'bootcamp.db'
 
@@ -104,31 +105,36 @@ def modifyEmployee():
     if request.method == 'GET':
         return render_template('EmployeeModify.html')
     if request.method == 'POST':
-        firstName = request.form.get('firstName', default="Error")
-        lastName = request.form.get('lastName', default="Error")
+        firstName = request.form.get('fname', default="Error")
+        lastName = request.form.get('lname', default="Error")
         businessunit = request.form.get('bu', default="Error")
         state = request.form.get('state', default="Error")
-        ftpt = request.form.get('FT/PT/.75', default="Error")
+        ftpt = request.form.get('ftpt', default="Error")
         city = request.form.get('city', default="Error")
         cmt = request.form.get('cmt', default="Error")
         totalYears = request.form.get('totalYears', default="Error")
-        registeredLicenses = request.form.get('registeredLicenses', default="Error")
-        skill = request.form.get('skill', default="Error")
-        skillLevel = request.form.get('skillLevel', default="Error")
+        registeredLicenses = request.form.get('Licenses', default="Error")
+        skill = request.form.get('Skill', default="Error")
+        skillLevel = request.form.get('skilllevel', default="Error")
+        
         try:
             # rem: args for get form for post
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            cur.execute("UPDATE EmployeeList SET ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level') VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE ('LastName') VALUES (?)", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel), (lastName))   
+            cur.execute("UPDATE EmployeeList SET [FirstName] = ?, [LastName] = ?, [FT/PT/.75?] = ?, [Business Unit] = ?, [City] = ?, [State/Province] = ?, [Career Matrix Title] = ?, [Total Years] = ?, [Registered Licenses] = ?, [Skill] = ?, [Skill Level] = ? WHERE [LastName] = ?", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))   
             # "UPDATE EmployeeList SET ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level') VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE ('LastName') VALUES (?)", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel), (lastName)) 
             # "UPDATE EmployeeList SET 'FirstName'=%s, 'FT/PT/.75'=%s, 'Business Unit'=%s, 'City'=%s, 'State/Province'=%s, 'Career Matrix Title'=%s, 'Total Years'=%s, 'Registered Licenses'=%s, 'Skill'=%s, 'Skill Level'=%s WHERE 'LastName'=%s" %(firstName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))
             conn.commit()
-            msg = "Record successfully updated"
-        except:
+            if cur.rowcount < 1:
+                msg = "Update failed"
+            else:
+                msg = "Record successfully updated"
+        except Error as e:
             conn.rollback()
-            msg = "error in modification operation"
+            msg = e
         finally:
             conn.close()
+            print(msg)
             return msg
 
 
