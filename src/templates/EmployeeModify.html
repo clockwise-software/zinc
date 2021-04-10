@@ -2,7 +2,8 @@
 {%block mainBlock%} 
 
 <h2> Change Details about Employee</h2>
-<!-- <form id='myForm' onsubmit="return modifyEmployees()"> -->
+<!-- <form id='myForm' onsubmit="return modifyEmployees()"> --> 
+<!-- Here we are matching people to modify by their last name, this is bad. There needs to be a unique ID for each employee-->
 <form id='myForm' action='/Employee/Modify' method='POST'>
   <label for="fname">First name:</label><br>
   <input type="text" id="fname" name="fname"><br>
@@ -46,40 +47,40 @@
 
 <script> 
 
-function modifyEmployees() 
-{ 
-    var firstName = document.forms["myForm"]["fname"].value;
-    var lastName = document.forms["myForm"]["lname"].value; 
-    var ftpt = document.forms["myForm"]["ftpt"].value; 
-    var businessunit = document.forms["myForm"]["bu"].value; 
-    var city = document.forms["myForm"]["city"].value;
-    var state = document.forms["myForm"]["state"].value; 
-    var careerMatrixTitle = document.forms["myForm"]["cmt"].value; 
-    var totalYears = document.forms["myForm"]["totalYears"].value; 
-    var registeredLicenses = document.forms["myForm"]["Licenses"].value; 
-    var skill = document.forms["myForm"]["Skill"].value; 
-    var skillLevel = document.forms["myForm"]["skilllevel"].value; 
+// function modifyEmployees() 
+// { 
+//     var firstName = document.forms["myForm"]["fname"].value;
+//     var lastName = document.forms["myForm"]["lname"].value; 
+//     var ftpt = document.forms["myForm"]["ftpt"].value; 
+//     var businessunit = document.forms["myForm"]["bu"].value; 
+//     var city = document.forms["myForm"]["city"].value;
+//     var state = document.forms["myForm"]["state"].value; 
+//     var careerMatrixTitle = document.forms["myForm"]["cmt"].value; 
+//     var totalYears = document.forms["myForm"]["totalYears"].value; 
+//     var registeredLicenses = document.forms["myForm"]["Licenses"].value; 
+//     var skill = document.forms["myForm"]["Skill"].value; 
+//     var skillLevel = document.forms["myForm"]["skilllevel"].value; 
 
-    params = 'firstName='+firstName+'&lastName='+lastName+'&FT/PT/.75='+ftpt+'&bu='+businessunit+'&city='+city+'&state='+state+
-    '&cmt='+careerMatrixTitle+'&totalYears='+totalYears+'&registeredLicenses='+registeredLicenses+'&skill='+skill+'&skillLevel='
-    +skillLevel; 
+//     params = 'firstName='+firstName+'&lastName='+lastName+'&FT/PT/.75='+ftpt+'&bu='+businessunit+'&city='+city+'&state='+state+
+//     '&cmt='+careerMatrixTitle+'&totalYears='+totalYears+'&registeredLicenses='+registeredLicenses+'&skill='+skill+'&skillLevel='
+//     +skillLevel; 
 
-    //console.log(params);
+//     //console.log(params);
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/Employee/Modify', true); // true is asynchronous
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.onload = function() {
-      if (xhttp.readyState === 4 && xhttp.status === 200) {
-        console.log(xhttp.responseText);
-        document.getElementById("txt").innerHTML = xhttp.responseText;
-      } else {
-        console.error(xhttp.statusText);
-      }
-    };
-    xhttp.send(params);
-    return false;
-}
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.open("POST", '/Employee/Modify', true); // true is asynchronous
+//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     xhttp.onload = function() {
+//       if (xhttp.readyState === 4 && xhttp.status === 200) {
+//         console.log(xhttp.responseText);
+//         document.getElementById("txt").innerHTML = xhttp.responseText;
+//       } else {
+//         console.error(xhttp.statusText);
+//       }
+//     };
+//     xhttp.send(params);
+//     return false;
+//}
 
 
 
