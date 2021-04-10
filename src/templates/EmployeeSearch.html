@@ -16,17 +16,28 @@
 <!-- not really it is a get and redirecting to a table page is not a bad plan -->
 <h2>Search for Employees</h2>
 <!-- <form id='myForm' action='/Student/InjectionSearch' method = 'post'> -->
-<form id='myForm' action='/Employee/Search/Updated' method = 'post'>
-  <label>First Name:
+<form id='myForm' action='/Employee/Search' method = 'POST'>
+  <label>First Name:</label>
+  <input type=text name=fname>
+  <br>
+  <!--
   <select id="firstName" multiple="multiple" >
+      {% for firstName in FirstName %}
+        <option value = {{firstName}}> {{firstName}} </option>
+      {% endfor %}
   </select>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#firstName').multiselect();
         });
     </script>
+  -->
 
-  <label>Last Name:
+
+  <label>Last Name:</label>
+  <input type=text name=lname>
+  <br>
+  <!--
   <select id="lastName" multiple="multiple" >
   </select>
     <script type="text/javascript">
@@ -34,87 +45,126 @@
             $('#lastName').multiselect();
         });
     </script>
+  -->
+  
 
-  <label>FT/PT/.75:
+  <label>FT/PT/.75:</label>
   <select id="ftpt" multiple="multiple" >
+      {% for time in Time %}
+        <option value = {{time[0]}}> {{time[0]}} </option>
+      {% endfor %}
   </select>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#ftpt').multiselect();
         });
     </script>
+  <br>
 
-  <label>Business Unit:
+  <label>Business Unit:</label>
   <select id="businessunit" multiple="multiple" >
+      {% for bu in BU %}
+        <option value = {{bu[0]}}> {{bu[0]}} </option>
+      {% endfor %}
   </select>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#businessunit').multiselect();
         });
     </script>
+  <br>
 
-  <label>City:
+  <label>City:</label>
   <select id="city" multiple="multiple" >
+      {% for city in City %}
+        <option value = {{city[0]}}> {{city[0]}} </option>
+      {% endfor %}
   </select>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#city').multiselect();
         });
     </script>
+  <br>
 
-  <label>State:
+  <label>State:</label>
   <select id="state" multiple="multiple" >
+      {% for state in State %}
+        <option value = {{state[0]}}> {{state[0]}} </option>
+      {% endfor %}
   </select>   
     <script type="text/javascript">
         $(document).ready(function() {
             $('#state').multiselect();
         });
     </script>
+  <br>
 
-    <label>Career Matrix Title:
-  <select id="careerMatrixTitle" multiple="multiple" >
+    <label>Career Matrix Title:</label>
+  <select id="cmt" multiple="multiple" >
+      {% for cmt in CMT %}
+        <option value = {{cmt[0]}}> {{cmt[0]}} </option>
+      {% endfor %}
   </select>  
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#careerMatrixTitle').multiselect();
+            $('#cmt').multiselect();
         });
     </script>
+  <br>
 
-  <label>Total Years:
+  <label>Total Years:</label>
   <select id="totalYears" multiple="multiple" >
+      {% for totalYears in Years %}
+        <option value = {{totalYears[0]}}> {{totalYears[0]}} </option>
+      {% endfor %}
   </select>   
     <script type="text/javascript">
         $(document).ready(function() {
             $('#totalYears').multiselect();
         });
     </script>
+  <br>
 
-  <label>Registered Licenses:
+  <label>Registered Licenses:</label>
   <select id="resgisteredLicenses" multiple="multiple" >
+      {% for registeredLicenses in regLic %}
+        <option value = {{registeredLicenses[0]}}> {{registeredLicenses[0]}} </option>
+      {% endfor %}
   </select>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#resgisteredLicenses').multiselect();
         });
     </script>
+  <br>
 
-  <label>Skill:
+  <label>Skill:</label>
   <select id="skill" multiple="multiple" >
+      {% for skill in Skill %}
+        <option value = {{skill[0]}}> {{skill[0]}} </option>
+      {% endfor %}
   </select>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#skill').multiselect();
         });
     </script>
+  <br>
 
-  <label>Skill Years:
-  <select id="skillYears" multiple="multiple" >
+  <label>Skill Level:</label>
+  <select id="skillLevel" multiple="multiple" >
+      {% for skillLevel in Level %}
+        <option value = {{skillLevel[0]}}> {{skillLevel[0]}} </option>
+      {% endfor %}
   </select>   
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#skillYears').multiselect();
+            $('#skillLevel').multiselect();
         });
     </script>
+  <br>
+
 <button type = "submit">Submit</button>
 </form>
 

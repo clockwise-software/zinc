@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def basic():
-    return render_template('Employee.html')
+    return render_template('EmployeeSearch.html')
 
 
 @app.route("/Employee/AddEmployee", methods=['POST', 'GET'])
@@ -59,7 +59,51 @@ def studentAddDetails():
 @app.route("/Employee/Search", methods=['GET', 'POST'])
 def surnameSearch():
     if request.method == 'GET':
-        return render_template('EmployeeSearch.html')
+        try:
+            conn = sqlite3.connect(DATABASE)
+            cur = conn.cursor()
+            cur.execute("SELECT FirstName FROM EmployeeList")
+            FirstName = cur.fetchall()
+            print(FirstName)
+
+            cur.execute("SELECT LastName from EmployeeList")
+            LastName = cur.fetchall()
+            print(LastName)
+
+            cur.execute("SELECT DISTINCT [FT/PT/.75?] from EmployeeList")
+            Time = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT [Business Unit] from EmployeeList")
+            BU = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT City from EmployeeList")
+            City = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT [State/Province] from EmployeeList")
+            State = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT [Career Matrix Title] from EmployeeList")
+            CMT = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT [Total Years] from EmployeeList")
+            Years = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT [Registered Licenses] from EmployeeList")
+            regLic = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT Skill from EmployeeList")
+            Skill = cur.fetchall()
+
+            cur.execute("SELECT DISTINCT [Skill Level] from EmployeeList")
+            Level = cur.fetchall()
+
+        except:
+            print('there was an error')
+            conn.close()
+        finally:
+            conn.close()
+            # return str(data)
+            return render_template('EmployeeSearch.html', FirstName=FirstName, LastName=LastName, Time=Time, BU=BU, City=City, State=State, CMT=CMT, Years=Years, regLic=regLic, Skill=Skill, Level=Level)
     if request.method == 'POST':
         try:
             # rem: args for get form for post
