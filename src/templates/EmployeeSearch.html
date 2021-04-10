@@ -14,7 +14,7 @@
 
 <!-- Do we need to process  with ajax?-->
 <!-- not really it is a get and redirecting to a table page is not a bad plan -->
-<h2>Search for Employees</h2>
+<h2>Search</h2>
 <!-- <form id='myForm' action='/Student/InjectionSearch' method = 'post'> -->
 
 <form id='myForm' action='/Employee/Search' method = 'POST'>
@@ -50,7 +50,7 @@
   
 
   <label>FT/PT/.75:</label>
-  <select id="ftpt" multiple="multiple" >
+  <select id="ftpt" multiple="multiple" name="FT/PT/.75">
       {% for time in Time %}
         <option value = {{time[0]}}> {{time[0]}} </option>
       {% endfor %}
@@ -63,7 +63,7 @@
   <br>
 
   <label>Business Unit:</label>
-  <select id="businessunit" multiple="multiple" >
+  <select id="businessunit" multiple="multiple" name="bu">
       {% for bu in BU %}
         <option value = {{bu[0]}}> {{bu[0]}} </option>
       {% endfor %}
@@ -76,7 +76,7 @@
   <br>
 
   <label>City:</label>
-  <select id="city" multiple="multiple" >
+  <select id="city" multiple="multiple" name="city">
       {% for city in City %}
         <option value = {{city[0]}}> {{city[0]}} </option>
       {% endfor %}
@@ -89,7 +89,7 @@
   <br>
 
   <label>State:</label>
-  <select id="state" multiple="multiple" >
+  <select id="state" multiple="multiple" name="state">
       {% for state in State %}
         <option value = {{state[0]}}> {{state[0]}} </option>
       {% endfor %}
@@ -102,7 +102,7 @@
   <br>
 
     <label>Career Matrix Title:</label>
-  <select id="cmt" multiple="multiple" >
+  <select id="cmt" multiple="multiple" name="cmt">
       {% for cmt in CMT %}
         <option value = {{cmt[0]}}> {{cmt[0]}} </option>
       {% endfor %}
@@ -115,7 +115,7 @@
   <br>
 
   <label>Total Years:</label>
-  <select id="totalYears" multiple="multiple" >
+  <select id="totalYears" multiple="multiple" name="totalYears">
       {% for totalYears in Years %}
         <option value = {{totalYears[0]}}> {{totalYears[0]}} </option>
       {% endfor %}
@@ -128,7 +128,7 @@
   <br>
 
   <label>Registered Licenses:</label>
-  <select id="resgisteredLicenses" multiple="multiple" >
+  <select id="resgisteredLicenses" multiple="multiple" name="registeredLicenses">
       {% for registeredLicenses in regLic %}
         <option value = {{registeredLicenses[0]}}> {{registeredLicenses[0]}} </option>
       {% endfor %}
@@ -141,7 +141,7 @@
   <br>
 
   <label>Skill:</label>
-  <select id="skill" multiple="multiple" >
+  <select id="skill" multiple="multiple" name="skill">
       {% for skill in Skill %}
         <option value = {{skill[0]}}> {{skill[0]}} </option>
       {% endfor %}
@@ -154,7 +154,7 @@
   <br>
 
   <label>Skill Level:</label>
-  <select id="skillLevel" multiple="multiple" >
+  <select id="skillLevel" multiple="multiple" name="skillLevel">
       {% for skillLevel in Level %}
         <option value = {{skillLevel[0]}}> {{skillLevel[0]}} </option>
       {% endfor %}
@@ -169,6 +169,43 @@
 <button type = "submit">Submit</button>
 
 </form>
+
+<br>
+
+<h2>Employees</h2>
+<table border = 1>
+   <thead>
+      <td>First Name</td>
+      <td>Last Name</td> 
+      <td>FT/PT/.75?</td>
+      <td>Business Unit</td> 
+      <td>City</td>
+      <td>State/Province</td> 
+      <td>Career Matrix Title</td> 
+      <td>Total Years</td> 
+      <td>Registered Licenses</td> 
+      <td>Skill</td> 
+      <td>Skill Level</td>
+   </thead>
+
+   {% for row in data %}
+   <!-- A List of tuples so row is each item in the list
+        and then the index is the column number.-->
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td> 
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td> 
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td>{{row[8]}}</td>
+        <td>{{row[9]}}</td> 
+        <td>{{row[10]}}</td>
+      </tr>
+   {% endfor %}
+</table>
 
 
 
