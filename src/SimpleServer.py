@@ -119,8 +119,9 @@ def modifyEmployee():
             # rem: args for get form for post
             conn = sqlite3.connect(DATABASE)
             cur = conn.cursor()
-            cur.execute("UPDATE  EmployeeList ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level')\
-                         WHERE LastName='LastName' VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))
+            cur.execute("UPDATE EmployeeList SET ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level') VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE ('LastName') VALUES (?)", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel), (lastName))   
+            # "UPDATE EmployeeList SET ('FirstName', 'LastName', 'FT/PT/.75?', 'Business Unit', 'City', 'State/Province', 'Career Matrix Title', 'Total Years', 'Registered Licenses', 'Skill', 'Skill Level') VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE ('LastName') VALUES (?)", (firstName, lastName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel), (lastName)) 
+            # "UPDATE EmployeeList SET 'FirstName'=%s, 'FT/PT/.75'=%s, 'Business Unit'=%s, 'City'=%s, 'State/Province'=%s, 'Career Matrix Title'=%s, 'Total Years'=%s, 'Registered Licenses'=%s, 'Skill'=%s, 'Skill Level'=%s WHERE 'LastName'=%s" %(firstName, ftpt, businessunit, city, state, cmt, totalYears, registeredLicenses, skill, skillLevel, lastName))
             conn.commit()
             msg = "Record successfully updated"
         except:
